@@ -71,7 +71,7 @@
 
         async function initializeStream() {
             try {
-                const res = await axios.put('https://skill-paddy.herokuapp.com/tutor/course/session/3/init', null, {
+                const res = await axios.put('https://skill-paddy.herokuapp.com/tutor/course/session/1/init', null, {
                     headers: {
                         Authorization: auth
                     }
@@ -87,7 +87,7 @@
 
         async function connectStream() {
             try {
-                const res = await axios.get('https://skill-paddy.herokuapp.com/tutor/course/session/3/join', {
+                const res = await axios.get('https://skill-paddy.herokuapp.com/tutor/course/session/1/join', {
                     headers: {
                         Authorization: auth
                     }
@@ -108,7 +108,7 @@
 
         async function startStream() {
             try {
-                const res = await axios.put('https://skill-paddy.herokuapp.com/tutor/course/session/3/start', null, {
+                const res = await axios.put('https://skill-paddy.herokuapp.com/tutor/course/session/1/start', null, {
                     headers: {
                         Authorization: auth
                     }
@@ -124,7 +124,7 @@
 
         async function stopLivestream() {
             try {
-                const res = await axios.put('https://skill-paddy.herokuapp.com/tutor/course/session/3/stop', null, {
+                const res = await axios.put('https://skill-paddy.herokuapp.com/tutor/course/session/1/stop', null, {
                     headers: {
                         Authorization: auth
                     }
