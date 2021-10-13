@@ -31,7 +31,7 @@
     </div>
     
     <script type="module">
-        const auth = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoyLCJlbWFpbCI6InR1dG9yQGdtYWlsLmNvbSIsImRlbGV0ZWQiOmZhbHNlLCJjcmVhdGVkQXQiOiIyMDIxLTEwLTExVDEwOjI2OjMyLjQ5N1oiLCJ1cGRhdGVkQXQiOiIyMDIxLTEwLTExVDEwOjI2OjMyLjQ5N1oiLCJyb2xlSWQiOjIsInJvbGUiOnsiaWQiOjIsIm5hbWUiOiJUdXRvciIsImtleSI6InR1dG9yIn19LCJpYXQiOjE2MzQwOTU1MjQsImV4cCI6MTYzNDE4MTkyNH0.cKg_qwiLcRJ1dPafb3be8wLy5xWRnX0u4tdBTx5Sky4'
+        const auth = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjo3LCJlbWFpbCI6InR1dG9yQGdtYWlsLmNvbSIsImRlbGV0ZWQiOmZhbHNlLCJjcmVhdGVkQXQiOiIyMDIxLTEwLTEzVDEwOjIxOjA3LjY0OVoiLCJ1cGRhdGVkQXQiOiIyMDIxLTEwLTEzVDEwOjIxOjA3LjY0OVoiLCJyb2xlSWQiOjIsInJvbGUiOnsiaWQiOjIsIm5hbWUiOiJUdXRvciIsImtleSI6InR1dG9yIn19LCJpYXQiOjE2MzQxMjA0NzEsImV4cCI6MTYzNDcyNTI3MX0.JIiG6myy_LUmbacVACkm2Kc8KKuedV3yp96XDCiQSBA'
         const initBtn = document.querySelector('.init-button')
         const connectBtn = document.querySelector('.connect-button')
         const startBtn = document.querySelector('.start-button')
@@ -71,7 +71,7 @@
 
         async function initializeStream() {
             try {
-                const res = await axios.put('http://localhost:8086/tutor/course/session/3/init', null, {
+                const res = await axios.put('https://skill-paddy.herokuapp.com/tutor/course/session/3/init', null, {
                     headers: {
                         Authorization: auth
                     }
@@ -87,7 +87,7 @@
 
         async function connectStream() {
             try {
-                const res = await axios.get('http://localhost:8086/tutor/course/session/3/join', {
+                const res = await axios.get('https://skill-paddy.herokuapp.com/tutor/course/session/3/join', {
                     headers: {
                         Authorization: auth
                     }
@@ -108,7 +108,7 @@
 
         async function startStream() {
             try {
-                const res = await axios.put('http://localhost:8086/tutor/course/session/3/start', null, {
+                const res = await axios.put('https://skill-paddy.herokuapp.com/tutor/course/session/3/start', null, {
                     headers: {
                         Authorization: auth
                     }
@@ -124,7 +124,7 @@
 
         async function stopLivestream() {
             try {
-                const res = await axios.put('http://localhost:8086/tutor/course/session/3/stop', null, {
+                const res = await axios.put('https://skill-paddy.herokuapp.com/tutor/course/session/3/stop', null, {
                     headers: {
                         Authorization: auth
                     }

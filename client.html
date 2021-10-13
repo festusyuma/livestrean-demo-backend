@@ -18,7 +18,7 @@
     </div>
 
     <script>
-        const auth = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoxLCJlbWFpbCI6ImZlc3R1c3l1bWFAZ21haWwuY29tIiwiZGVsZXRlZCI6ZmFsc2UsImNyZWF0ZWRBdCI6IjIwMjEtMTAtMTFUMTA6MjU6MDguODg0WiIsInVwZGF0ZWRBdCI6IjIwMjEtMTAtMTFUMTA6MjU6MDguODg0WiIsInJvbGVJZCI6MSwicm9sZSI6eyJpZCI6MSwibmFtZSI6IlVzZXIiLCJrZXkiOiJ1c2VyIn19LCJpYXQiOjE2MzQxMDkwNDgsImV4cCI6MTYzNDcxMzg0OH0.yKUFwRKmaKpJf0AXKyvbX-W8EyXEWQJ_9eweOCPaEs8'
+        const auth = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjo4LCJlbWFpbCI6ImZlc3R1c3l1bWFAZ21haWwuY29tIiwiZGVsZXRlZCI6ZmFsc2UsImNyZWF0ZWRBdCI6IjIwMjEtMTAtMTNUMTA6MjE6NTIuOTY4WiIsInVwZGF0ZWRBdCI6IjIwMjEtMTAtMTNUMTA6MjE6NTIuOTY4WiIsInJvbGVJZCI6MSwicm9sZSI6eyJpZCI6MSwibmFtZSI6IlVzZXIiLCJrZXkiOiJ1c2VyIn19LCJpYXQiOjE2MzQxMjA1MTYsImV4cCI6MTYzNDcyNTMxNn0.naS55ZxGX9GDlKaIBVDBO-q96lPkB0-IjU1wZJt4Dy4'
         const joinBtn = document.querySelector('.join-button')
 
         let apiKey = ''
@@ -54,7 +54,7 @@
 
         async function connectStream() {
             try {
-                const res = await axios.get('http://localhost:8086/customer/course/session/3/join', {
+                const res = await axios.get('https://skill-paddy.herokuapp.com/customer/course/session/3/join', {
                     headers: {
                         Authorization: auth,
                     }
