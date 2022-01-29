@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Livestreams', {
+    await queryInterface.createTable('OpenTokLVs', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -12,8 +12,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       ended: {
-        type: Sequelize.BOOLEAN,
-        defaultValue: false,
+        type: Sequelize.BOOLEAN
       },
       createdAt: {
         allowNull: false,
@@ -26,6 +25,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Livestreams');
+    await queryInterface.dropTable('OpenTokLVs');
   }
 };

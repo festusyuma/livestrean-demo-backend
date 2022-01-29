@@ -10,7 +10,7 @@ const secret = process.env.OPENTK_SECRET
 const openTok = new OpenTok(apiKey, secret, null)
 
 const init = () => service(async () => {
-  let livestream = await db['Livestream'].findOne({
+  let livestream = await db['OpenTokLV'].findOne({
     order: [['createdAt', 'DESC']],
     where: { ended: false }
   })
@@ -19,10 +19,9 @@ const init = () => service(async () => {
     const session = await createStreamSession()
     if (!session) return response.failed(messages.CREATION_ERROR('session'))
 
-    livestream = await db['Livestream'].create({ sessionId: session.sessionId })
+    livestream = await db['OpenTokLV'].create({ sessionId: session.sessionId })
     if (!livestream) return response.failed(messages.CREATION_ERROR('livestream'))
   }
-
   return response.success({ sessionId: livestream.sessionId })
 })
 
