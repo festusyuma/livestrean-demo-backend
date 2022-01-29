@@ -23,8 +23,6 @@ const generateReference = () => {
   return `SKPDY-${result}`;
 }
 
-export {
-  rand,
-  validEmail,
-  generateReference,
-}
+module.exports.rand = rand
+module.exports.validEmail = validEmail
+module.exports.generateReference = generateReference

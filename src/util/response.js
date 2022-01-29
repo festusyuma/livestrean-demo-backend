@@ -1,5 +1,3 @@
-const {handleError} = require("../service");
-
 const build = ({ status, success = false, message, data = null }) => {
     return { status: status ? status : 500, success, message, data }
 }
@@ -35,7 +33,7 @@ const forbidden = (message = 'You do not have permission') => {
 }
 
 const serverError = (e = null) => {
-    handleError(e)
+    console.error(e)
     return build({
         status: 500,
         message: 'An internal server error occurred'

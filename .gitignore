@@ -6,3 +6,4 @@
 .vercel
 
 package-lock.json
+data.sqlite3
