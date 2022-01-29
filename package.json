@@ -1,0 +1,27 @@
+{
+  "name": "opentok-livestrean-demo",
+  "version": "1.0.0",
+  "description": "opentok livestream demo",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js",
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/festusyuma/opentok-livestrean-demo.git"
+  },
+  "author": "festusyuma",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/festusyuma/opentok-livestrean-demo/issues"
+  },
+  "homepage": "https://github.com/festusyuma/opentok-livestrean-demo#readme",
+  "dependencies": {
+    "dotenv": "^14.3.2",
+    "express": "^4.17.2",
+    "nodemon": "^2.0.15",
+    "opentok": "^2.12.1"
+  }
+}
