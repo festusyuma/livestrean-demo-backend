@@ -44,3 +44,4 @@ const serverError = (e = null) => {
 
 const response = { success, failed, badRequest, unauthorized, forbidden, serverError }
 module.exports = response
+
