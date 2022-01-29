@@ -45,9 +45,10 @@ const stream = () => service(async () => {
   return response.success({ sessionId, apiKey, token: token.token })
 })
 
-const join = () => {
+const join = (data) => service(async () => {
+  const {  }
   return response.success()
-}
+})
 
 const createStreamSession = async () => {
   return new Promise((resolve, reject) => {
@@ -65,6 +66,7 @@ const generateStreamToken = (data) => service(async () => {
   const token = openTok.generateToken(sessionId, {
     role: role.key === 'admin' ? 'publisher' : 'subscriber',
     data: JSON.stringify({ name: fullName }),
+    expirationTime: DateTime.now().plus({ days: 7 }).valueOf(),
     initialLayoutClassList: ["focus"],
   })
 
