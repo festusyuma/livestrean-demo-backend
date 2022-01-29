@@ -14,8 +14,12 @@ module.exports = {
       token: {
         type: Sequelize.STRING
       },
+      sessionId: {
+        type: Sequelize.STRING
+      },
       minutesActive: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        defaultValue: 0,
       },
       createdAt: {
         allowNull: false,

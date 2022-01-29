@@ -16,7 +16,11 @@ module.exports = (sequelize, DataTypes) => {
   OpenTokLVToken.init({
     username: DataTypes.STRING,
     token: DataTypes.STRING,
-    minutesActive: DataTypes.INTEGER
+    sessionId: DataTypes.STRING,
+    minutesActive: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0
+    }
   }, {
     sequelize,
     modelName: 'OpenTokLVToken',

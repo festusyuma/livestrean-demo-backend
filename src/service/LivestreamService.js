@@ -30,11 +30,19 @@ const stream = () => service(async () => {
   if (!initRes.success) return initRes
   const { sessionId } = initRes.data
 
-  const tokenRes = await generateStreamToken({ sessionId, role: 'admin', appName })
-  if (!tokenRes.success) return tokenRes
-  const token = tokenRes.data
+  let token = await db['OpenTokLVToken'].findOne({
+    where: { sessionId, username: 'admin' }
+  })
 
-  return response.success({ sessionId, apiKey, token })
+  if (!token) {
+    const tokenRes = await generateStreamToken({ sessionId, role: 'admin', fulName: appName })
+    if (!tokenRes.success) return tokenRes
+
+    token = await db['OpenTokLVToken'].create({ token: tokenRes.data, sessionId, username: 'admin' })
+    if (!token) return response.failed(messages.GENERATION_ERROR('token'))
+  }
+
+  return response.success({ sessionId, apiKey, token: token.token })
 })
 
 const join = () => {
@@ -57,7 +65,6 @@ const generateStreamToken = (data) => service(async () => {
   const token = openTok.generateToken(sessionId, {
     role: role.key === 'admin' ? 'publisher' : 'subscriber',
     data: JSON.stringify({ name: fullName }),
-    expireTime: DateTime.now().plus({ hours: 2 }).valueOf(),
     initialLayoutClassList: ["focus"],
   })
 
