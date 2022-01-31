@@ -43,8 +43,9 @@ const reset = async () => service(async () => {
   return response.success()
 })
 
-const join = (data) => service(async () => {
+const join = ({ data }) => service(async () => {
   const { fullName, phoneNumber } = data
+  if (!phoneNumber) return response.badRequest(messages.FIELD_REQUIRED('phone number'))
 
   let livestream = await OpenTokRepo.fetchActive()
   if (!livestream) return response.failed(messages)

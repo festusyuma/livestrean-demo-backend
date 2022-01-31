@@ -1,12 +1,19 @@
 require('dotenv').config()
 
 const express = require('express')
-const {OpenTokLivestreamController} = require("./src/controller");
+const Cors = require('cors')
+const bodyParser = require('body-parser')
 const app = express();
+
+app.use(Cors())
+app.use(bodyParser.json({ limit: '50mb' }))
+app.use(express.json({ limit: '50mb' }))
+app.use(express.urlencoded({ extended: false, limit: '50mb' }))
 const router = express.Router();
 
+const {OpenTokLivestreamController} = require("./src/controller");
 router.get('/opentok/stream', OpenTokLivestreamController.stream)
-router.get('/opentok/join', OpenTokLivestreamController.join)
+router.post('/opentok/join', OpenTokLivestreamController.join)
 app.use(router)
 
 const HOST = process.env.HOST || 'localhost'
