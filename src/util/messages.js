@@ -34,7 +34,8 @@ const messages = {
   UNRECOGNIZED_EVENT: 'unrecognized event',
   UNAUTHORIZED: 'you are not authorized',
   ACCOUNT_DISABLED: 'your account has been disabled and all privileges have been revoked',
-  VALIDATION_ERROR: 'an unknown validation error has occurred'
+  VALIDATION_ERROR: 'an unknown validation error has occurred',
+  NO_RUNNING_STREAM: 'there is no ongoing live stream',
 }
 
 module.exports = messages

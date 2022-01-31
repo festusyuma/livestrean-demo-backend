@@ -11,9 +11,10 @@ const openTok = new OpenTok(apiKey, secret, null)
 
 const init = () => service(async () => {
   let livestream = await db['OpenTokLV'].findOne({
-    order: [['createdAt', 'DESC']],
-    where: { ended: false }
+    order: [['createdAt', 'DESC']]
   })
+
+  console.log(livestream)
 
   if (!livestream) {
     const session = await createStreamSession()
@@ -22,31 +23,34 @@ const init = () => service(async () => {
     livestream = await db['OpenTokLV'].create({ sessionId: session.sessionId })
     if (!livestream) return response.failed(messages.CREATION_ERROR('livestream'))
   }
-  return response.success({ sessionId: livestream.sessionId })
+  return response.success(livestream.sessionId)
 })
 
 const stream = () => service(async () => {
   const initRes = await init()
   if (!initRes.success) return initRes
-  const { sessionId } = initRes.data
+  const sessionId = initRes.data
 
-  let token = await db['OpenTokLVToken'].findOne({
-    where: { sessionId, username: 'admin' }
-  })
+  const tokenData = { fullName: appName, username: 'admin', sessionId, role: 'admin' }
+  const tokenRes = await fetchToken(tokenData)
+  if (!tokenRes) return tokenRes
+  const token = tokenRes.data
 
-  if (!token) {
-    const tokenRes = await generateStreamToken({ sessionId, role: 'admin', fulName: appName })
-    if (!tokenRes.success) return tokenRes
-
-    token = await db['OpenTokLVToken'].create({ token: tokenRes.data, sessionId, username: 'admin' })
-    if (!token) return response.failed(messages.GENERATION_ERROR('token'))
-  }
-
-  return response.success({ sessionId, apiKey, token: token.token })
+  return response.success({ sessionId, apiKey, token })
 })
 
 const join = (data) => service(async () => {
-  const {  }
+  const { fullName, phoneNumber } = data
+
+  let livestream = await db['OpenTokLV'].findOne({
+    order: [['createdAt', 'DESC']],
+    where: { ended: false }
+  })
+
+  if (!livestream) return response.failed(messages)
+
+
+
   return response.success()
 })
 
@@ -59,6 +63,24 @@ const createStreamSession = async () => {
     })
   })
 }
+
+const fetchToken = async (data) => service(async () => {
+  const { sessionId, role, username, fullName } = data
+
+  let token = await db['OpenTokLVToken'].findOne({
+    where: { sessionId, username }
+  })
+
+  if (!token) {
+    const tokenRes = await generateStreamToken({ sessionId, role, fullName })
+    if (!tokenRes.success) return tokenRes
+
+    token = await db['OpenTokLVToken'].create({ token: tokenRes.data, sessionId, username })
+    if (!token) return response.failed(messages.GENERATION_ERROR('token'))
+  }
+
+  return response.success(token.token)
+})
 
 const generateStreamToken = (data) => service(async () => {
   const { sessionId, role, fullName } = data
