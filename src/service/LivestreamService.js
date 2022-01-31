@@ -2,6 +2,7 @@ const OpenTok = require("opentok")
 const db = require('../db/models')
 const { response, messages } = require("../util");
 const { service } = require("./");
+const { OpenTokRepo } = require('../repo');
 const {DateTime} = require("luxon");
 
 const appName = process.env.APP_NAME || 'Festusyuma Livestream test'
@@ -10,11 +11,7 @@ const secret = process.env.OPENTK_SECRET
 const openTok = new OpenTok(apiKey, secret, null)
 
 const init = () => service(async () => {
-  let livestream = await db['OpenTokLV'].findOne({
-    order: [['createdAt', 'DESC']]
-  })
-
-  console.log(livestream)
+  let livestream = await OpenTokRepo.fetchActive()
 
   if (!livestream) {
     const session = await createStreamSession()
@@ -39,19 +36,32 @@ const stream = () => service(async () => {
   return response.success({ sessionId, apiKey, token })
 })
 
+const reset = async () => service(async () => {
+  let livestream = await OpenTokRepo.fetchActive()
+  if (livestream) await livestream.destroy()
+
+  return response.success()
+})
+
 const join = (data) => service(async () => {
   const { fullName, phoneNumber } = data
 
-  let livestream = await db['OpenTokLV'].findOne({
-    order: [['createdAt', 'DESC']],
-    where: { ended: false }
-  })
-
+  let livestream = await OpenTokRepo.fetchActive()
   if (!livestream) return response.failed(messages)
 
+  const sessionId = livestream.sessionId
+  const tokenData = {
+    fullName,
+    username: phoneNumber,
+    sessionId,
+    role: 'user'
+  }
 
+  const tokenRes = await fetchToken(tokenData)
+  if (!tokenRes) return tokenRes
+  const token = tokenRes.data
 
-  return response.success()
+  return response.success({ sessionId, apiKey, token })
 })
 
 const createStreamSession = async () => {
@@ -99,4 +109,5 @@ const generateStreamToken = (data) => service(async () => {
 module.exports = {
   stream,
   join,
+  reset,
 }

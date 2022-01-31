@@ -6,6 +6,7 @@ const app = express();
 const router = express.Router();
 
 router.get('/opentok/stream', OpenTokLivestreamController.stream)
+router.get('/opentok/join', OpenTokLivestreamController.join)
 app.use(router)
 
 const HOST = process.env.HOST || 'localhost'
