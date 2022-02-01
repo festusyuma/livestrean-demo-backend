@@ -97,7 +97,7 @@ const generateStreamToken = (data) => service(async () => {
   const { sessionId, role, fullName } = data
 
   const token = openTok.generateToken(sessionId, {
-    role: role.key === 'admin' ? 'publisher' : 'subscriber',
+    role: role === 'admin' ? 'publisher' : 'subscriber',
     data: JSON.stringify({ name: fullName }),
     expirationTime: DateTime.now().plus({ days: 7 }).valueOf(),
     initialLayoutClassList: ["focus"],
