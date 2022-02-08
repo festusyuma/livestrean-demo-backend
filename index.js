@@ -14,6 +14,7 @@ const router = express.Router();
 const {OpenTokLivestreamController} = require("./src/controller");
 router.get('/opentok/stream', OpenTokLivestreamController.stream)
 router.post('/opentok/join', OpenTokLivestreamController.join)
+router.put('/opentok/publish', OpenTokLivestreamController.broadcast)
 router.delete('/opentok', OpenTokLivestreamController.reset)
 app.use(router)
 

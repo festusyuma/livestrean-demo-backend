@@ -6,11 +6,13 @@ const join = (req, res) => build(res, LivestreamService.join, {
     data: req.body
 })
 const reset = (req, res) => build(res, LivestreamService.reset, {})
+const broadcast = (req, res) => build(res, LivestreamService.broadcast, {})
 
 const OpenTokStreamController = {
     stream,
     join,
-    reset
+    reset,
+    broadcast,
 }
 
 module.exports = OpenTokStreamController

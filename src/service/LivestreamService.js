@@ -33,17 +33,25 @@ const stream = () => service(async () => {
   if (!tokenRes) return tokenRes
   const token = tokenRes.data
 
-  openTok.startBroadcast(sessionId, {}, (error, session) => {
-    console.log(error)
-    console.log(session)
-  })
-
   return response.success({ sessionId, apiKey, token })
 })
 
 const reset = async () => service(async () => {
   let livestream = await OpenTokRepo.fetchActive()
   if (livestream) await livestream.destroy()
+
+  return response.success()
+})
+
+const broadcast = async () => service(async () => {
+  const initRes = await init()
+  if (!initRes.success) return initRes
+  const sessionId = initRes.data
+
+  openTok.startBroadcast(sessionId, {}, (error, session) => {
+    console.log(error)
+    console.log(session)
+  })
 
   return response.success()
 })
@@ -118,4 +126,5 @@ module.exports = {
   stream,
   join,
   reset,
+  broadcast,
 }
