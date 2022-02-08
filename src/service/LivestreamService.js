@@ -67,7 +67,9 @@ const join = ({ data }) => service(async () => {
 
 const createStreamSession = async () => {
   return new Promise((resolve, reject) => {
-    openTok.createSession({}, (e, session) => {
+    openTok.createSession({
+      mediaMode: 'routed'
+    }, (e, session) => {
       if (e) reject(e)
       else if (session) resolve(session)
       else reject('error creating ')
