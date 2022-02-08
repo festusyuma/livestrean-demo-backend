@@ -48,7 +48,13 @@ const broadcast = async () => service(async () => {
   if (!initRes.success) return initRes
   const sessionId = initRes.data
 
-  openTok.startBroadcast(sessionId, {}, (error, session) => {
+  openTok.startBroadcast(sessionId, {
+    settings: {
+      hls: {
+        lowLatency: true,
+      }
+    },
+  }, (error, session) => {
     console.log(error)
     console.log(session)
   })
