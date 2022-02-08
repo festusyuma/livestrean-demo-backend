@@ -33,6 +33,11 @@ const stream = () => service(async () => {
   if (!tokenRes) return tokenRes
   const token = tokenRes.data
 
+  openTok.startBroadcast(sessionId, {}, (error, session) => {
+    console.log(error)
+    console.log(session)
+  })
+
   return response.success({ sessionId, apiKey, token })
 })
 
