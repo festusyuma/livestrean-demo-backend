@@ -19,10 +19,12 @@
   },
   "homepage": "https://github.com/festusyuma/opentok-livestrean-demo#readme",
   "dependencies": {
+    "aws-sdk": "^2.1111.0",
     "body-parser": "^1.19.1",
     "cors": "^2.8.5",
     "dotenv": "^14.3.2",
     "express": "^4.17.2",
+    "jsonwebtoken": "^8.5.1",
     "luxon": "^2.3.0",
     "opentok": "^2.12.1",
     "sequelize": "^6.14.1",

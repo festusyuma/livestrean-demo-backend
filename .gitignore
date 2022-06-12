@@ -7,3 +7,5 @@
 
 package-lock.json
 data.sqlite3
+
+private-key.pem
